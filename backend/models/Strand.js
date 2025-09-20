@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const strandSchema = new mongoose.Schema({
+    createdBy:{ 
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+    },
   threadId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Thread',
