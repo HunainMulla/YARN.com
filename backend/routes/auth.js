@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 
 router.post("/register", async (req, res) => {
     const { username, email, password } = req.body;
+    console.log(username, email, password);
     if (!username || !email || !password) {
         return res.status(400).json({ message: "All fields are required" });
     }
@@ -19,7 +20,7 @@ router.post("/register", async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({ username, email, password: hashedPassword });
         await newUser.save();
-        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: "1h" });
+        const token = jwt.sign({ email: email }, process.env.JWT_SECRET, { expiresIn: "1h" });
         res.json({ message: "User registered successfully", token });
     } catch (error) {
         console.log(error);
@@ -29,6 +30,7 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
     const { email, password } = req.body;
+    console.log(email, password);
     if (!email || !password) {
         return res.status(400).json({ message: "All fields are required" });
     }

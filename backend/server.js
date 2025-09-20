@@ -12,9 +12,11 @@ app.use(express.json());
 // Routes
 const threadsRoutes = require('./routes/threads');
 const strandsRoutes = require('./routes/strands');
+const authRoutes = require('./routes/auth');
 
 app.use('/api/threads', threadsRoutes);
 app.use('/api/strands', strandsRoutes);
+app.use('/api/auth', authRoutes);
 
 // Basic route
 app.get('/', (req, res) => {
